@@ -52,6 +52,6 @@ class App{
         // handle params
         $this->__params = array_values($urlArr);
 
-        call_user_func_array([$this->__controller, $this->action], $this->__params);
+        call_user_func_array([$this->__controller, $this->__action], $this->__params);
     }
 }
