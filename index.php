@@ -1,5 +1,5 @@
 <?php
-// session
-require_once "bootstrap.php";
+session_start();
+require_once("bootstrap.php");
 
-$myapp = new App();
+$app = new App();
