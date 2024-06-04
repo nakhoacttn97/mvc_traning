@@ -13,9 +13,7 @@
     <?php
     $this->render('blocks/header');
     ?>
-    <div>
-        <p>This is Content !</p>
-    </div>
+    <?php $this->render($content, $sub_content); ?>
     <?php
     $this->render('blocks/footer');
     ?>

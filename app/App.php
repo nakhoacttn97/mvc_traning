@@ -1,9 +1,13 @@
 <?php
 class App{
     private $__controller, $__action, $__params;
+    private $__routes;
+
     function __construct(){
 
         global $routes;
+
+        $this->__routes = new Route();
 
         if(!empty($routes['default_controller'])){
             $this->__controller = $routes['default_controller'];
@@ -28,7 +32,13 @@ class App{
     }
 
     public function handleUrl(){
+
         $url = $this->getUrl();
+        
+        //call func for handle Route
+        $url = $this->__routes->handleRoute($url);
+        echo $url;
+
         $urlArr = array_filter(explode('/', $url));
         $urlArr = array_values($urlArr);
 
