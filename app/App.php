@@ -17,7 +17,6 @@ class App{
         $this->__params = [];
 
        $url = $this->handleUrl();
-       echo $url;
     }
 
     function getUrl(){
@@ -37,10 +36,29 @@ class App{
         
         //call func for handle Route
         $url = $this->__routes->handleRoute($url);
-        echo $url;
 
         $urlArr = array_filter(explode('/', $url));
         $urlArr = array_values($urlArr);
+        
+        $urlCheck = '';
+        if(!empty($urlArr)){
+            foreach($urlArr as $key => $item){
+                $urlCheck.=$item.'/';
+                $fileCheck = rtrim($urlCheck, '/');
+                $fileArr = explode('/', $fileCheck);
+                $fileArr[count($fileArr)-1] = ucfirst($fileArr[count($fileArr)-1]).'Controller';
+                $fileCheck = implode('/', $fileArr);
+                
+                if(!empty($urlArr[$key-1])){
+                    unset($urlArr[$key-1]);
+                }
+                if(file_exists('app/controllers/'.($fileCheck).'.php')){
+                    $urlCheck = $fileCheck;
+                    break;
+                }
+            }
+            $urlArr = array_values($urlArr);
+        }
 
         // handle for Controller
         if(!empty($urlArr[0])){
@@ -49,8 +67,8 @@ class App{
             $this->__controller = ucfirst($this->__controller)."Controller";
         }
 
-        if(file_exists('app/controllers/'.$this->__controller.'.php')){
-            require_once('controllers/'.$this->__controller.'.php');
+        if(file_exists('app/controllers/'.$urlCheck.'.php')){
+            require_once('controllers/'.$urlCheck.'.php');
             
             //Kiem tra class $this->__controller ton tai !
             if(class_exists($this->__controller)){
@@ -79,11 +97,6 @@ class App{
         }else{
             $this->loadError();
         }
-        
-
-        // echo '<pre>';
-        // print_r($this->__params);
-        // echo '</pre>';
     }
 
     public function loadError($name='404'){

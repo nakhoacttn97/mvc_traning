@@ -15,7 +15,10 @@ class Route{
                 }
             }
         }
-        echo $handleUrl;
         return $handleUrl;
     }
 }
+
+/**Note
+ * De xu ly Ruote can biet ve bieu thuc chinh quy
+ */
