@@ -36,7 +36,10 @@ if(!empty($config['database'])){
     $db_config = array_filter($config['database']);
     if(!empty($db_config)){
         require_once "core/Connection.php";
-        $conn = Connection::getInstance($config);  // se goi ben trong class khac
+        //$conn = Connection::getInstance($config);  // se goi ben trong class khac
+        //var_dump($conn);
+        require_once "core/Database.php";
+        $db = new Database();
     }
 }
 
