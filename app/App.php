@@ -6,6 +6,7 @@ class App{
     function __construct(){
 
         global $routes;
+        global $config;
 
         $this->__routes = new Route();
 
@@ -65,6 +66,11 @@ class App{
             $this->__controller = ucfirst($urlArr[0])."Controller";
         }else{
             $this->__controller = ucfirst($this->__controller)."Controller";
+        }
+
+        // handle if urlCheck is Null
+        if(empty($urlCheck)){
+            $urlCheck = $this->__controller;   
         }
 
         if(file_exists('app/controllers/'.$urlCheck.'.php')){

@@ -14,11 +14,24 @@ $folder = str_replace(strtolower($_SERVER['DOCUMENT_ROOT']), '', strtolower(_DIR
 $web_root = $web_root.$folder;
 
 define('_WEB_ROOT', $web_root);
-//echo _WEB_ROOT;
+/**
+ * Autoload config
+ */
+$config_dir = scandir('configs');
+if(!empty($config_dir)){
+    foreach($config_dir as $item){
+        if($item != '.' && $item != '..' && file_exists('configs/'.$item)){
+            require_once 'configs/'.$item;
+        }
+    }
+}
 
-require_once('configs/routes.php');
-require_once('core/Route.php');
+
+require_once('core/Route.php'); //Load Route class
 require_once("app/App.php");    //Load App
+
+$db_config = array_filter($config['database']);
+var_dump($db_config);
 require_once("core/BaseController.php");    //Load Base Controller
 
 

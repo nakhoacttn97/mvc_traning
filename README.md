@@ -17,4 +17,4 @@
 - Giải pháp để bớt phải sử dụng requrie trong các layout view, thì chúng ta cần gọi vào layout chung
 - khi đó view và các trường thông tin cần thiết sẽ được chứa trong mảng đa chiều
 
-* Tiến độ xem record: Phần 3 - phút thứ 17 : create web_root
+* Tiến độ xem record: Phần 6 - phút thứ 17:43 : setup for configs

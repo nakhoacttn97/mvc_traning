@@ -4,8 +4,12 @@ class Route{
     function handleRoute($url){
         global $routes;
         unset($routes['default_controller']);
-        //var_dump($routes);
+        
         $url = trim($url, '/');
+        
+        if(empty($url)){
+            $url = '/';
+        }
         
         $handleUrl = $url;
         if(isset($routes)){
