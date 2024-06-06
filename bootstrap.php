@@ -1,4 +1,5 @@
 <?php
+
 define('_DIR_ROOT', __DIR__);
 
 // handle http root
@@ -30,8 +31,15 @@ if(!empty($config_dir)){
 require_once('core/Route.php'); //Load Route class
 require_once("app/App.php");    //Load App
 
-$db_config = array_filter($config['database']);
-var_dump($db_config);
+// check connect database
+if(!empty($config['database'])){
+    $db_config = array_filter($config['database']);
+    if(!empty($db_config)){
+        require_once "core/Connection.php";
+        $conn = Connection::getInstance($config);  // se goi ben trong class khac
+    }
+}
+
 require_once("core/BaseController.php");    //Load Base Controller
 
 
